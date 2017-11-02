@@ -575,10 +575,11 @@
     // x-origin
     if (!sameOrigin(el.href)) return;
 
-
+    // IE11 fix - el.pathname doesn't return the absolute url
+    var pathname = el.pathname.replace(new RegExp("^" + base), "");
 
     // rebuild path
-    var path = el.pathname + el.search + (el.hash || '');
+    var path = base + pathname + el.search + (el.hash || '');
 
     // same page
     var orig = path;
